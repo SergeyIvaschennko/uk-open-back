@@ -21,7 +21,16 @@ public class MoviesSeries {
     @Column(nullable = false)
     private String name;
 
-    @Column(nullable = false)
-    private String typeOfContentId;
-}
+    @Column(name = "type_of_content_id", nullable = false)
+    private Long typeOfContentId;
 
+    @Column(name = "movies_series_meta_id", nullable = false)
+    private Long moviesSeriesMetaId;
+
+    @ManyToOne
+    @JoinColumn(name = "type_of_content_id", referencedColumnName = "id", insertable = false, updatable = false)
+    private TypeOfContent typeOfContent;
+
+    @OneToOne(mappedBy = "moviesSeries")
+    private MoviesSeriesMeta moviesSeriesMeta;
+}

@@ -18,7 +18,7 @@ public class Episodes {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
+    @Column(name = "seasons_id", nullable = false)
     private Long seasonsId;
 
     @Column(nullable = false)
@@ -26,5 +26,8 @@ public class Episodes {
 
     @Column(nullable = false)
     private String title;
-}
 
+    @ManyToOne
+    @JoinColumn(name = "seasons_id", referencedColumnName = "id", insertable = false, updatable = false)
+    private Seasons seasons;
+}

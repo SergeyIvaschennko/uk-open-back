@@ -18,7 +18,7 @@ public class MoviesSeriesMeta {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
+    @Column(name = "movies_series_id", nullable = false)
     private Long moviesSeriesId;
 
     private String pic;
@@ -30,5 +30,9 @@ public class MoviesSeriesMeta {
     private String emoji;
 
     private String release;
+
+    @OneToOne
+    @JoinColumn(name = "movies_series_id", referencedColumnName = "id", insertable = false, updatable = false)
+    private MoviesSeries moviesSeries;
 }
 

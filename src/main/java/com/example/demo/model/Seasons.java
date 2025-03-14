@@ -18,10 +18,13 @@ public class Seasons {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
+    @Column(name = "movies_series_id", nullable = false)
     private Long moviesSeriesId;
 
     @Column(nullable = false)
     private Integer seasonNumber;
-}
 
+    @ManyToOne
+    @JoinColumn(name = "movies_series_id", referencedColumnName = "id", insertable = false, updatable = false)
+    private MoviesSeries moviesSeries;
+}

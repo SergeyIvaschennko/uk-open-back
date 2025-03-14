@@ -18,16 +18,27 @@ public class WordsOfContent {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "episode_id", nullable = false)
+    private Long episodeId;
+
+    @Column(name = "movies_series_id", nullable = false)
+    private Long moviesSeriesId;
+
+    @Column(name = "word_id", nullable = false)
+    private Long wordId;
+
     @ManyToOne
-    @JoinColumn(name = "episode_id", nullable = false)
+    @JoinColumn(name = "episode_id", referencedColumnName = "id", insertable = false, updatable = false)
     private Episodes episode;
 
     @ManyToOne
-    @JoinColumn(name = "movies_series_id", nullable = false)
+    @JoinColumn(name = "movies_series_id", referencedColumnName = "id", insertable = false, updatable = false)
     private MoviesSeries moviesSeries;
 
     @ManyToOne
-    @JoinColumn(name = "word_id", nullable = false)
+    @JoinColumn(name = "word_id", referencedColumnName = "id", insertable = false, updatable = false)
     private Word word;
 }
+
+
 
