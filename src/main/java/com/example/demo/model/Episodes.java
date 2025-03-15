@@ -1,5 +1,6 @@
 package com.example.demo.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -29,5 +30,6 @@ public class Episodes {
 
     @ManyToOne
     @JoinColumn(name = "seasons_id", referencedColumnName = "id", insertable = false, updatable = false)
+    @JsonIgnore
     private Seasons seasons;
 }

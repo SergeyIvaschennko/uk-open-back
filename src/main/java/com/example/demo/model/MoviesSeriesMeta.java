@@ -1,5 +1,6 @@
 package com.example.demo.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -33,6 +34,7 @@ public class MoviesSeriesMeta {
 
     @OneToOne
     @JoinColumn(name = "movies_series_id", referencedColumnName = "id", insertable = false, updatable = false)
+    @JsonIgnore
     private MoviesSeries moviesSeries;
 }
 
