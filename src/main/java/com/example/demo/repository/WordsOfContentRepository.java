@@ -12,5 +12,9 @@ public interface WordsOfContentRepository extends JpaRepository<WordsOfContent, 
 
     @Query("SELECT w.word FROM WordsOfContent w WHERE w.moviesSeriesId = :moviesSeriesId AND w.episodeId = :episodeId")
     List<Word> findWordsBySeriesAndEpisode(@Param("moviesSeriesId") Long moviesSeriesId, @Param("episodeId") Long episodeId);
+
+    @Query("SELECT w.word FROM WordsOfContent w WHERE w.moviesSeriesId = :moviesSeriesId")
+    List<Word> findWordsByMovie(@Param("moviesSeriesId") Long moviesSeriesId);
+
 }
 

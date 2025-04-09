@@ -18,7 +18,7 @@ public class WordsOfContent {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "episode_id", nullable = false)
+    @Column(name = "episode_id", nullable = true)
     private Long episodeId;
 
     @Column(name = "movies_series_id", nullable = false)

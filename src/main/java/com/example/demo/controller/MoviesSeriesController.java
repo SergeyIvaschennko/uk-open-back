@@ -32,7 +32,7 @@ public class MoviesSeriesController {
 
 
     // Получить список сериалов с лучшим рейтингом по убыванию
-    @GetMapping("/audio/files")
+    @GetMapping("/types")
     public List<TypeOfContent> listAudioFiles() {
         return typeOfContentRepository.findAll();
     }
@@ -68,7 +68,7 @@ public class MoviesSeriesController {
     }
 
     //слова для определенного эпизода сериала
-    @GetMapping("/find")
+    @GetMapping("/find/series")
     public ResponseEntity<List<Word>> getWordsBySeriesNameAndEpisodeId(
             @RequestParam String seriesName,
             @RequestParam Long episodeId) {
@@ -83,6 +83,27 @@ public class MoviesSeriesController {
 
         // Получить все слова, связанные с данным сериалом и эпизодом
         List<Word> words = wordsOfContentRepository.findWordsBySeriesAndEpisode(moviesSeries.getId(), episodeId);
+
+        // Если слов не найдено, возвращаем статус 204 No Content
+        if (words.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+
+        // Возвращаем найденные слова
+        return ResponseEntity.ok(words);
+    }
+
+    @GetMapping("/find/movie")
+    public ResponseEntity<List<Word>> getWordsBySeriesNameAndEpisodeId(
+            @RequestParam String movieName) {
+
+        // Найти сериал по его имени
+        MoviesSeries moviesSeries = moviesSeriesRepository.findByName(movieName)
+                .orElseThrow(() -> new RuntimeException("Movies Series not found with name: " + movieName));
+
+
+        // Получить все слова, связанные с данным сериалом и эпизодом
+        List<Word> words = wordsOfContentRepository.findWordsByMovie(moviesSeries.getId());
 
         // Если слов не найдено, возвращаем статус 204 No Content
         if (words.isEmpty()) {
