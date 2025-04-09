@@ -14,8 +14,13 @@ import java.util.Optional;
 public interface MoviesSeriesRepository extends JpaRepository<MoviesSeries, Long> {
 
 
-    @Query("SELECT m FROM MoviesSeries m JOIN m.moviesSeriesMeta msm WHERE m.typeOfContentId = 1 ORDER BY msm.rating DESC")
-    List<MoviesSeries> findTopRatedSeries();
+
+
+    @Query("SELECT m FROM MoviesSeries m JOIN m.moviesSeriesMeta msm WHERE m.typeOfContentId = :typeOfContentId ORDER BY msm.rating DESC")
+    List<MoviesSeries> findTopRatedSeriesByTypeOfContent(@Param("typeOfContentId") Long typeOfContentId);
+
+
+
 
     @Query("SELECT m.moviesSeriesMeta FROM MoviesSeries m WHERE m.id = :seriesId")
     MoviesSeriesMeta findMetaBySeriesId(@Param("seriesId") Long seriesId);
@@ -44,4 +49,6 @@ public interface MoviesSeriesRepository extends JpaRepository<MoviesSeries, Long
     );
 
 
+    @Query("SELECT m FROM MoviesSeries m JOIN m.moviesSeriesMeta msm WHERE msm.year = 2011 OR msm.year = 2019 ORDER BY msm.rating DESC")
+    List<MoviesSeries> findMoviesReleasedIn2024Or2025();
 }

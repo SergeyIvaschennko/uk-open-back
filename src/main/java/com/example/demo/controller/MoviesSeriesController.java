@@ -39,9 +39,31 @@ public class MoviesSeriesController {
 
     //самые лучшие сериалы
     @GetMapping("/top-series")
-    public List<MoviesSeries> listMovies() {
-        return moviesSeriesRepository.findTopRatedSeries();
+    public List<MoviesSeries> listSeries() {
+        return moviesSeriesRepository.findTopRatedSeriesByTypeOfContent(1L);
     }
+
+    //самые лучшие сериалы
+    @GetMapping("/top-movies")
+    public List<MoviesSeries> listMovies() {
+        return moviesSeriesRepository.findTopRatedSeriesByTypeOfContent(2L);
+    }
+
+    //самые лучшие сериалы
+    @GetMapping("/top-cartoons")
+    public List<MoviesSeries> listCartoons() {
+        return moviesSeriesRepository.findTopRatedSeriesByTypeOfContent(3L);
+    }
+
+    @GetMapping("/released-in-2024-or-2025")
+    public ResponseEntity<List<MoviesSeries>> getMoviesReleasedIn2024Or2025() {
+        List<MoviesSeries> movies = moviesSeriesRepository.findMoviesReleasedIn2024Or2025();
+        if (movies.isEmpty()) {
+            return ResponseEntity.noContent().build(); // Возвращаем 204, если нет фильмов
+        }
+        return ResponseEntity.ok(movies); // Возвращаем 200 и список фильмов
+    }
+
 
     //получение меты по id фильма
     @GetMapping("/{seriesId}/meta")

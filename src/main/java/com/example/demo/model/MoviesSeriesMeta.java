@@ -32,6 +32,8 @@ public class MoviesSeriesMeta {
 
     private String release;
 
+    private Long year;
+
     @OneToOne
     @JoinColumn(name = "movies_series_id", referencedColumnName = "id", insertable = false, updatable = false)
     @JsonIgnore
