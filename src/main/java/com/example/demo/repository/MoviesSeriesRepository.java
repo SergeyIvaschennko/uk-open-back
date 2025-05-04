@@ -27,6 +27,17 @@ public interface MoviesSeriesRepository extends JpaRepository<MoviesSeries, Long
     """, nativeQuery = true)
     List<MoviesSeries> findRandomTopRatedByType(Long typeId);
 
+//    @Query(value = """
+//        SELECT * FROM movies_series
+//        WHERE similarity(name, :query) > 0.3
+//        ORDER BY similarity(name, :query) DESC
+//        LIMIT 10
+//    """, nativeQuery = true)
+//    List<MoviesSeries> searchBySimilarName(@Param("query") String query);
+
+
+    @Query("SELECT m FROM MoviesSeries m WHERE m.name ILIKE CONCAT('%', :query, '%') ORDER BY m.name")
+    List<MoviesSeries> searchBySimilarName(@Param("query") String query);
 
 
 }
