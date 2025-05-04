@@ -14,4 +14,13 @@ public interface SeasonsRepository extends JpaRepository<Seasons, Long> {
     List<Seasons> findByMoviesSeriesId(@Param("seriesId") Long seriesId);
 
     Optional<Seasons> findByMoviesSeriesIdAndSeasonNumber(Long moviesSeriesId, Integer seasonNumber);
+
+    @Query("""
+        SELECT s.id
+        FROM Seasons s
+        WHERE s.moviesSeriesId = :movieId
+          AND s.seasonNumber = :seasonNumber
+    """)
+    Optional<Long> findSeasonIdByMovieIdAndSeasonNumber(@Param("movieId") Long movieId,
+                                                        @Param("seasonNumber") Integer seasonNumber);
 }

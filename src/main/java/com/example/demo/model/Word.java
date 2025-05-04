@@ -27,7 +27,7 @@ public class Word {
     @Column(nullable = false)
     private String partOfSpeech;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String level;
 }
 

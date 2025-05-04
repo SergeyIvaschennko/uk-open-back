@@ -10,5 +10,14 @@ import java.util.Optional;
 
 public interface EpisodesRepository extends JpaRepository<Episodes, Long> {
     Optional<Episodes> findBySeasonsIdAndEpisodeNumber(Long seasonsId, Integer episodeNumber);
+
+    @Query("""
+        SELECT e.id
+        FROM Episodes e
+        WHERE e.seasonsId = :seasonsId
+          AND e.episodeNumber = :episodeNumber
+    """)
+    Optional<Long> findEpisodeIdBySeasonIdAndEpisodeNumber(@Param("seasonsId") Long seasonsId,
+                                                           @Param("episodeNumber") Integer episodeNumber);
 }
 

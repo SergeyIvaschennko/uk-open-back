@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+@CrossOrigin("http://localhost:3000")
 @RestController
 public class RanksController {
 
@@ -27,19 +28,19 @@ public class RanksController {
     //самые лучшие сериалы
     @GetMapping("/top-series")
     public List<MoviesSeries> listSeries() {
-        return moviesSeriesRepository.findTopRatedSeriesByTypeOfContent(1L);
+        return moviesSeriesRepository.findRandomTopRatedByType(1L);
     }
 
     //самые лучшие сериалы
     @GetMapping("/top-movies")
     public List<MoviesSeries> listMovies() {
-        return moviesSeriesRepository.findTopRatedSeriesByTypeOfContent(2L);
+        return moviesSeriesRepository.findRandomTopRatedByType(2L);
     }
 
     //самые лучшие сериалы
     @GetMapping("/top-cartoons")
     public List<MoviesSeries> listCartoons() {
-        return moviesSeriesRepository.findTopRatedSeriesByTypeOfContent(3L);
+        return moviesSeriesRepository.findRandomTopRatedByType(3L);
     }
 
     //новинки
